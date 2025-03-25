@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import {
   Package,
@@ -124,8 +123,8 @@ const AdminProducts = () => {
       setProducts(prev => prev.filter(product => product.id !== productToDelete));
       setSelectedProducts(prev => prev.filter(id => id !== productToDelete));
       
-      toast("Product deleted", {
-        description: "The product has been successfully deleted.",
+      toast("Product deleted successfully", {
+        description: `The product "${product.name}" has been permanently deleted.`,
       });
     }
     

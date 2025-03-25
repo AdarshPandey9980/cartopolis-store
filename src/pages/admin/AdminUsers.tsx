@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import {
   Users,
@@ -173,8 +172,8 @@ const AdminUsers = () => {
       setUsers(prev => prev.filter(user => user.id !== userToDelete));
       setSelectedUsers(prev => prev.filter(id => id !== userToDelete));
       
-      toast("User deleted", {
-        description: "The user has been successfully deleted.",
+      toast("User deleted successfully", {
+        description: `The user "${user.email}" has been permanently deleted.`,
       });
     }
     
@@ -607,3 +606,4 @@ const AdminUsers = () => {
 };
 
 export default AdminUsers;
+

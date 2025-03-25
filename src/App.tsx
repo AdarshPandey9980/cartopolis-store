@@ -15,6 +15,8 @@ import OrderConfirmation from "./pages/OrderConfirmation";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import NotFound from "./pages/NotFound";
+import UserOrders from "./pages/UserOrders";
+import OrderTracking from "./pages/OrderTracking";
 
 // Admin Pages
 import AdminLogin from "./pages/admin/AdminLogin";
@@ -52,6 +54,8 @@ const App = () => (
           <Route path="/order-confirmation" element={<OrderConfirmation />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/account/orders" element={<UserOrders />} />
+          <Route path="/order-tracking/:id" element={<OrderTracking />} />
           
           {/* Admin Routes */}
           <Route path="/admin/login" element={<AdminLogin />} />
