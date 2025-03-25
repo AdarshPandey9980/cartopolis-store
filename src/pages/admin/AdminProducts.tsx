@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import {
   Package,
@@ -119,12 +120,15 @@ const AdminProducts = () => {
 
   const confirmDelete = () => {
     if (productToDelete) {
+      // Find the product to get its name for the toast message
+      const productToDeleteObj = products.find(p => p.id === productToDelete);
+      
       // In a real app, this would be an API call
       setProducts(prev => prev.filter(product => product.id !== productToDelete));
       setSelectedProducts(prev => prev.filter(id => id !== productToDelete));
       
       toast("Product deleted successfully", {
-        description: `The product "${product.name}" has been permanently deleted.`,
+        description: `The product "${productToDeleteObj?.name}" has been permanently deleted.`,
       });
     }
     
@@ -180,7 +184,6 @@ const AdminProducts = () => {
     if (!formData.name || !formData.description || formData.price <= 0) {
       toast("Validation error", {
         description: "Please fill all required fields.",
-        variant: "destructive",
       });
       return;
     }

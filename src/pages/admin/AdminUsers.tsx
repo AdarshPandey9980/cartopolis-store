@@ -78,7 +78,6 @@ const AdminUsers = () => {
     status: "Active" as User["status"],
   });
 
-  // Generate mock users
   useEffect(() => {
     const generateMockUsers = () => {
       setIsLoading(true);
@@ -168,12 +167,15 @@ const AdminUsers = () => {
 
   const confirmDelete = () => {
     if (userToDelete) {
+      // Find the user to get their email for the toast message
+      const userToDeleteObj = users.find(u => u.id === userToDelete);
+      
       // In a real app, this would be an API call
       setUsers(prev => prev.filter(user => user.id !== userToDelete));
       setSelectedUsers(prev => prev.filter(id => id !== userToDelete));
       
       toast("User deleted successfully", {
-        description: `The user "${user.email}" has been permanently deleted.`,
+        description: `The user "${userToDeleteObj?.email}" has been permanently deleted.`,
       });
     }
     
@@ -223,7 +225,6 @@ const AdminUsers = () => {
     if (!formData.name || !formData.email) {
       toast("Validation error", {
         description: "Please fill all required fields.",
-        variant: "destructive",
       });
       return;
     }
@@ -606,4 +607,3 @@ const AdminUsers = () => {
 };
 
 export default AdminUsers;
-
