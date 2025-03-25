@@ -17,6 +17,10 @@ import Register from "./pages/Register";
 import NotFound from "./pages/NotFound";
 import UserOrders from "./pages/UserOrders";
 import OrderTracking from "./pages/OrderTracking";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
+import Profile from "./pages/Profile";
+import Settings from "./pages/Settings";
 
 // Admin Pages
 import AdminLogin from "./pages/admin/AdminLogin";
@@ -31,6 +35,16 @@ const AdminRoute = ({ children }: { children: React.ReactNode }) => {
   
   if (!adminUser) {
     return <Navigate to="/admin/login" replace />;
+  }
+  
+  return <>{children}</>;
+};
+
+const UserRoute = ({ children }: { children: React.ReactNode }) => {
+  const user = localStorage.getItem("user");
+  
+  if (!user) {
+    return <Navigate to="/login" replace />;
   }
   
   return <>{children}</>;
@@ -54,7 +68,34 @@ const App = () => (
           <Route path="/order-confirmation" element={<OrderConfirmation />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/account/orders" element={<UserOrders />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+          
+          {/* Protected User Routes */}
+          <Route 
+            path="/profile" 
+            element={
+              <UserRoute>
+                <Profile />
+              </UserRoute>
+            } 
+          />
+          <Route 
+            path="/settings" 
+            element={
+              <UserRoute>
+                <Settings />
+              </UserRoute>
+            } 
+          />
+          <Route 
+            path="/account/orders" 
+            element={
+              <UserRoute>
+                <UserOrders />
+              </UserRoute>
+            } 
+          />
           <Route path="/order-tracking/:id" element={<OrderTracking />} />
           
           {/* Admin Routes */}
